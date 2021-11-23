@@ -1,0 +1,1 @@
+Тестовое задание "PriceThrottler" для Luxoft. А.Хитров
