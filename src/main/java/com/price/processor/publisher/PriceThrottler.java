@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 public class PriceThrottler implements PriceProcessor {
 
     private final Map<PriceProcessor, CurrencyPairConsumer> observers = new ConcurrentHashMap<>();
-    private final ExecutorService executorService = Executors.newCachedThreadPool();
+    private final ExecutorService threadPool = Executors.newCachedThreadPool();
 
     @Override
     public void subscribe(PriceProcessor priceProcessor) {
@@ -30,8 +30,8 @@ public class PriceThrottler implements PriceProcessor {
             CurrencyPair currencyPair = CurrencyPair.of(ccyPair, rate);
             consumer.getCurrencyPairQueue().offer(currencyPair);
 
-            System.out.println("sent " + currencyPair + "to queue");
-            executorService.submit(consumer);
+            System.out.println("sent " + currencyPair + "to processor " + processor);
+            threadPool.submit(consumer);
         });
     }
 }

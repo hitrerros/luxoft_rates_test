@@ -3,13 +3,14 @@ package com.price.processor.consumer;
 import com.price.processor.PriceProcessor;
 import lombok.Getter;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class PriceProcessorSlow implements PriceProcessor {
 
-    private final long DELAY_MLS = 100L;
+    private final long DELAY_MLS = 1000L;
     @Getter
-    private final ConcurrentHashMap<String, Double> deliveredRates = new ConcurrentHashMap<>();
+    private final Map<String, Double> deliveredRates = new ConcurrentHashMap<>();
 
     @Override
     public void onPrice(String ccyPair, double rate) {
